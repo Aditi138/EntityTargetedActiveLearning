@@ -304,7 +304,6 @@ from models.model_builder import *
 import os
 import uuid
 from dataloaders.data_loader import *
-from utils.Convert_Output_Darpa import *
 uid = uuid.uuid4().get_hex()[:6]
 
 if __name__ == "__main__":

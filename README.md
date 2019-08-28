@@ -30,6 +30,8 @@ The conll format is a tab separated two-column format as shown below: <br>
 ```El   O``` <br>
 ```grupo    O```<br>
 
+The LDC NER label set differ from the CoNLL label set by one tag. Therefore, add ``` --misc ``` to the argument set when running any experiments on CoNLL data. The label set has been hard-coded in the ```data_loaders/data_loader.py``` file. 
+
 ### Cross-Lingual Transferred Data
 We used the model proposed by (Xie et al. 2018) to get the cross-lingually transferred data from English. 
 Please refer to their code [here](https://github.com/thespectrewithin/cross-lingual_NER).
@@ -46,9 +48,10 @@ For the Fine-Tune training scheme, train a base NER model on the transferred mod
         --fixedVocab \
         --test_conll \
         --tot_epochs 1000 \
-	    --aug_lang_train_path $DATA/vocab.conll \
+	--aug_lang_train_path $DATA/vocab.conll \
         --init_lr 0.015 \
         --valid_freq 1300 \
+        --misc \
         --pretrain_emb_path $DATA/esp.vec \
         --dev_path $DATA/esp.dev \
         --test_path $DATA/esp.test \

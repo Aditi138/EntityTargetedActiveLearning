@@ -27,8 +27,6 @@ class NER_DataLoader():
         self.pretrained_embedding_path = args.pretrain_emb_path
         self.use_discrete_feature = args.use_discrete_features
         self.use_brown_cluster = args.use_brown_cluster
-        self.orm_norm = args.oromo_normalize
-        self.orm_lower = args.train_lowercase_oromo
 
         self.train_senttypes = self.dev_senttypes = self.test_senttypes = None
 
@@ -53,8 +51,12 @@ class NER_DataLoader():
                 self.tag_to_id[tag] = len(self.tag_to_id)
         else:
             self.tag_to_id, self.word_to_id, self.char_to_id = self.read_files(paths_to_read)
-
-
+        print("Size of vocab before: %d" % len(self.word_to_id))
+        self.word_to_id['<unk>'] = len(self.word_to_id) + 1
+        self.char_to_id['<unk>'] = len(self.char_to_id) + 1
+        self.word_to_id['<\s>'] = 0
+        self.char_to_id['<pad>'] = 0
+        print("Size of vocab after: %d" % len(self.word_to_id))
         self.word_padding_token = 0
         self.char_padding_token = 0
 
@@ -223,10 +225,7 @@ class NER_DataLoader():
             tgt_tags.append(temp_ner)
             bc_features.append(temp_bc)
             known_tags.append(temp_known_tag)
-            if not self.args.isLr:
-                discrete_features.append([])
-            else:
-                discrete_features.append(get_feature_sent(lang, sent, self.args, self.cap_ratio_dict, type=type))
+            discrete_features.append([])
 
             # print len(discrete_features[-1])
 
@@ -234,7 +233,7 @@ class NER_DataLoader():
             i = 0
             one_sent = []
             for line in fin:
-                if line.strip() == "":
+                if line.strip() == "" or line.strip() == "\n":
                     if len(one_sent) > 0:
                         add_sent(one_sent, sent_types[i] if sent_types is not None else None)
                         i += 1

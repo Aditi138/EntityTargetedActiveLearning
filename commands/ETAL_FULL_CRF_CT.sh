@@ -1,5 +1,5 @@
-$DIR="../data/Spanish/ETAL_FULL_CRF_CT"
-$DATA="../data/Spanish"
+DIR="../data/Spanish/ETAL_FULL_CRF_CT"
+DATA="../data/Spanish"
 
 for i in {1..20} ; do
     python2 ../helper_scripts/pickKTokens.py --input $DIR/to_annotate_v${i}.1.conll --k 200 --output $DIR/to_annotate_v${i}.1_200.conll
@@ -29,6 +29,7 @@ for i in {1..20} ; do
         --fineTune \
         --test_conll \
         --tot_epochs 1000 \
+        --misc \
 	    --aug_lang_train_path $DATA/vocab.conll \
         --init_lr 0.015 \
         --load_from_path ../saved_models/spanish_full_transfer_baseline.model \
@@ -48,13 +49,11 @@ for i in {1..20} ; do
         --mode test_1 \
         --fixedVocab \
         --aug_lang_train_path $DATA/vocab.conll \
-  	    --word_emb_dim 100 \
-        --batch_size 10 \
+  	--word_emb_dim 100 \
         --model_name ${MODEL_NAME} \
         --lang es \
-        --tot_epochs 200 \
+        --misc \
         --load_from_path  ../saved_models/200_Entropy_Full_CT_spa_${i}.1_finetune.model \
-        --valid_freq 1300 \
         --pretrain_emb_path   $DATA/esp.vec  \
         --dev_path $DATA/esp.dev  \
         --test_path $DIR/unlabel_v${i}.1.conll \

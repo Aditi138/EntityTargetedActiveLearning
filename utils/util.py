@@ -108,7 +108,7 @@ def get_pretrained_emb(fixedVocab, path_to_emb, word_to_id, char_to_id, dim):
         word_emb.append(np.random.uniform(-math.sqrt(3.0 / dim), math.sqrt(3.0 / dim), size=dim))
 
     not_covered = 0
-
+    print(len(word_to_id), len(word_emb))
 
     for word, id in word_to_id.iteritems():
         if word in pretrain_word_emb:
