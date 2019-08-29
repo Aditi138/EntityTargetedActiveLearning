@@ -9,7 +9,7 @@ DynetVersion commit 284838815ece9297a7100cc43035e1ea1b133a5
 In the ```data/```, create a directory per language as shown for ```data/Spanish```. Download the CoNLL train/dev/test NER datasets for that language here. To acquire LDC datasets, please get the required access.
 
 
-For storing the trained models, create directory ```eval``` and ```saved_models``` in the parent folder.
+For storing the trained models, create directory ```saved_models``` in the parent folder.
 ### Embeddings
 Combine monolingual data acquired from Wikipedia with the plain text extracted from the labeled data. Train 100-d [Glove]((https://nlp.stanford.edu/projects/glove/)) embeddings
 
