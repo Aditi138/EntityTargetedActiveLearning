@@ -353,7 +353,7 @@ class chain_CRF_decoder(Decoder):
         W_src2tag_readout = dy.parameter(self.W_src2tag_readout)
         b_src2tag_readout = dy.parameter(self.b_src2tag_readout)
         W_score_tag = dy.parameter(self.W_scores_readout2tag)
-        #b_score_tag = dy.parameter(self.b_scores_readout2tag)
+        b_score_tag = dy.parameter(self.b_scores_readout2tag)
 
         tag_embs = [dy.tanh(dy.affine_transform([b_src2tag_readout, W_src2tag_readout, src_encoding]))
                     for src_encoding in src_encodings]
