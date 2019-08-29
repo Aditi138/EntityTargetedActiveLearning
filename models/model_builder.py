@@ -86,7 +86,7 @@ class CRF_Model(object):
                                                                 , self.B_UNK, self.I_UNK)
 
             else:
-                self.crf_decoder.get_uncertain_subsequences_relaxed(sent, tag_scores, alphas, betas, alpha_value, gammas,
+                self.crf_decoder.get_uncertain_subsequences(sent, tag_scores, alphas, betas, alpha_value, gammas,
                                                        best_path_copy
                                                        , self.B_tags, self.I_tags, self.O_tags)
 
